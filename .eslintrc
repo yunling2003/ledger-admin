@@ -2,16 +2,21 @@
   "root": true,
   "parser": "babel-eslint",
   "parserOptions": {
-    "sourceType": "module"
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "env": {
-    "browser": false,
+    "browser": true,
     "node": true,
     "es6": true
   },
-  // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-  "extends": "standard",
-  // add your custom rules here
+  "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+  ],
   "rules": {
     // allow paren-less arrow functions
     "arrow-parens": 0,

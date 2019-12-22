@@ -9,4 +9,4 @@ export default function Root() {
       <MainLayout path="/" exact component={IssueList} />
     </Switch>
   );
-};
+}
