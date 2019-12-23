@@ -153,12 +153,16 @@ function MainLayout(props) {
                   className={classes.toolBarTitle}
                   noWrap
                 >
-                  Leon's Admin Hub
+                  Leon&apos;s Admin Hub
                 </Typography>
                 <IconButton color="inherit" onClick={switchTheme}>
                   <InvertColorsIcon />
                 </IconButton>
-                <IconButton color="inherit" edge="end" href="https://github.com/yunling2003/ledger-admin">
+                <IconButton
+                  color="inherit"
+                  edge="end"
+                  href="https://github.com/yunling2003/ledger-admin"
+                >
                   <GitHubIcon />
                 </IconButton>
               </Toolbar>
