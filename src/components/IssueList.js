@@ -53,6 +53,20 @@ const rows = [
     status: 2,
     createdDate: '2019-12-8',
     createdBy: 'Bob'
+  },
+  {
+    id: 7,
+    name: 'Microsoft Ignite Summit Shanghai 3/14',
+    status: 0,
+    createdDate: '2019-12-24',
+    createdBy: 'Leon'
+  },
+  {
+    id: 8,
+    name: 'Veracity product integration pipeline',
+    status: 1,
+    createdDate: '2019-12-25',
+    createdBy: 'Leon'
   }
 ];
 
