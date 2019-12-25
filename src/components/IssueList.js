@@ -9,66 +9,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import Paper from '@material-ui/core/Paper';
-
-const rows = [
-  {
-    id: 1,
-    name: 'Project A schedule review',
-    status: 0,
-    createdDate: '2019-12-23',
-    createdBy: 'Leon'
-  },
-  {
-    id: 2,
-    name: 'Deploy B to Production',
-    status: 1,
-    createdDate: '2019-12-10',
-    createdBy: 'Leon'
-  },
-  {
-    id: 3,
-    name: 'Demo meeting Sprint 16',
-    status: 2,
-    createdDate: '2019-11-30',
-    createdBy: 'Leon'
-  },
-  {
-    id: 4,
-    name: 'Birth day celeration(December)',
-    status: 0,
-    createdDate: '2019-12-5',
-    createdBy: 'Leon'
-  },
-  {
-    id: 5,
-    name: 'Report project C status',
-    status: 1,
-    createdDate: '2019-12-9',
-    createdBy: 'Jack'
-  },
-  {
-    id: 6,
-    name: 'Team building activity',
-    status: 2,
-    createdDate: '2019-12-8',
-    createdBy: 'Bob'
-  },
-  {
-    id: 7,
-    name: 'Microsoft Ignite Summit Shanghai 3/14',
-    status: 0,
-    createdDate: '2019-12-24',
-    createdBy: 'Leon'
-  },
-  {
-    id: 8,
-    name: 'Veracity product integration pipeline',
-    status: 1,
-    createdDate: '2019-12-25',
-    createdBy: 'Leon'
-  }
-];
+import * as API from '../services/index';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -181,6 +125,11 @@ export default function IssueList() {
   const [orderBy, setOrderBy] = React.useState('name');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setRows] = React.useState([]);
+
+  React.useEffect(() => {
+    API.getAllIssues().then((res) => setRows(res.data));
+  }, []);
 
   const handleRequestSort = (event, property) => {
     const isDesc = orderBy === property && order === 'desc';
@@ -258,6 +207,9 @@ export default function IssueList() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
+      <Button variant="contained" color="secondary" startIcon={<AddIcon />}>
+        Add
+      </Button>
     </div>
   );
 }
