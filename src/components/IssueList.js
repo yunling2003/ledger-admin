@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -12,7 +13,7 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Paper from '@material-ui/core/Paper';
-import * as API from '../services/index';
+import { requestFetchIssues } from '../store/actions';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -125,11 +126,12 @@ export default function IssueList() {
   const [orderBy, setOrderBy] = React.useState('name');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setRows] = React.useState([]);
+  const rows = useSelector((state) => state.issues.items);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    API.getAllIssues().then((res) => setRows(res.data));
-  }, []);
+    dispatch(requestFetchIssues());
+  }, [dispatch]);
 
   const handleRequestSort = (event, property) => {
     const isDesc = orderBy === property && order === 'desc';
