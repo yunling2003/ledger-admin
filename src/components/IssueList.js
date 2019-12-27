@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -8,7 +9,10 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Paper from '@material-ui/core/Paper';
 import IssueListHead from './IssueListHead';
 import { requestFetchIssues } from '../store/actions';
@@ -64,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function IssueList() {
+  const history = useHistory();
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('name');
@@ -89,6 +94,14 @@ export default function IssueList() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const handleEditClick = (event, id) => {
+    history.push(`/issue/${id}`);
+  };
+
+  const handleDeleteClick = (event, id) => {
+    console.log(id);
   };
 
   const getStatusDesc = (status) => {
@@ -131,6 +144,22 @@ export default function IssueList() {
                       </TableCell>
                       <TableCell align="left">{row.createdDate}</TableCell>
                       <TableCell align="left">{row.createdBy}</TableCell>
+                      <TableCell size="small" padding="none">
+                        <IconButton
+                          color="inherit"
+                          onClick={(event) => handleEditClick(event, row.id)}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                      </TableCell>
+                      <TableCell size="small" padding="none">
+                        <IconButton
+                          color="inherit"
+                          onClick={(event) => handleDeleteClick(event, row.id)}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                   );
                 })}

@@ -110,7 +110,7 @@ function MainLayout(props) {
   const { component: Component, ...rest } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [layoutTheme, setLayoutTheme] = React.useState(blueTheme);
 
   const handleDrawerOpen = () => {
@@ -193,7 +193,7 @@ function MainLayout(props) {
                   </ListItemIcon>
                   <ListItemText primary={'Dashboard'} />
                 </ListItem>
-                <ListItem button key={'Issue List'}>
+                <ListItem button component="a" href="/" key={'Issue List'}>
                   <ListItemIcon>
                     <FormatListNumberedIcon />
                   </ListItemIcon>

@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Switch } from 'react-router-dom';
 import MainLayout from './Layout';
-import IssueList from './components/IssueList';
+
+const IssueList = lazy(() => import('./components/IssueList'));
+const EditIssue = lazy(() => import('./components/EditIssue'));
 
 export default function Root() {
   return (
-    <Switch>
-      <MainLayout path="/" exact component={IssueList} />
-    </Switch>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <MainLayout path="/" exact component={IssueList} />
+        <MainLayout path="/issue/:id" component={EditIssue} />
+      </Switch>
+    </Suspense>
   );
 }

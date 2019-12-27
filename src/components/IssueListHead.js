@@ -48,6 +48,7 @@ export default function IssueListHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
+        <TableCell colSpan={2}>Actions</TableCell>
       </TableRow>
     </TableHead>
   );
