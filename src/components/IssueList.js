@@ -146,7 +146,7 @@ export default function IssueList() {
                       <TableCell align="left">{row.createdBy}</TableCell>
                       <TableCell size="small" padding="none">
                         <IconButton
-                          color="inherit"
+                          color="secondary"
                           onClick={(event) => handleEditClick(event, row.id)}
                         >
                           <EditIcon />
@@ -154,7 +154,7 @@ export default function IssueList() {
                       </TableCell>
                       <TableCell size="small" padding="none">
                         <IconButton
-                          color="inherit"
+                          color="secondary"
                           onClick={(event) => handleDeleteClick(event, row.id)}
                         >
                           <DeleteIcon />
@@ -181,7 +181,7 @@ export default function IssueList() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      <Button variant="contained" color="secondary" startIcon={<AddIcon />}>
+      <Button variant="contained" color="primary" startIcon={<AddIcon />}>
         Add
       </Button>
     </div>

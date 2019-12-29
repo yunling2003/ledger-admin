@@ -189,19 +189,19 @@ function MainLayout(props) {
               <List>
                 <ListItem button key={'Dashboard'}>
                   <ListItemIcon>
-                    <DashboardIcon />
+                    <DashboardIcon color="primary" />
                   </ListItemIcon>
                   <ListItemText primary={'Dashboard'} />
                 </ListItem>
                 <ListItem button component="a" href="/" key={'Issue List'}>
                   <ListItemIcon>
-                    <FormatListNumberedIcon />
+                    <FormatListNumberedIcon color="primary" />
                   </ListItemIcon>
                   <ListItemText primary={'Issue List'} />
                 </ListItem>
                 <ListItem button key={'Resource List'}>
                   <ListItemIcon>
-                    <ComputerIcon />
+                    <ComputerIcon color="primary" />
                   </ListItemIcon>
                   <ListItemText primary={'Resource List'} />
                 </ListItem>
@@ -210,7 +210,7 @@ function MainLayout(props) {
               <List>
                 <ListItem button key={'Users'}>
                   <ListItemIcon>
-                    <PersonIcon />
+                    <PersonIcon color="primary" />
                   </ListItemIcon>
                   <ListItemText primary={'Users'} />
                 </ListItem>
