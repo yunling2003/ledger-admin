@@ -1,9 +1,12 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, MenuItem, Paper } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import { requestFetchIssueById } from '../store/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,17 +26,26 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditIssue() {
   const classes = useStyles();
+  const { id } = useParams();
+  const issue = useSelector((state) =>
+    state.issues.items.find((x) => x.id === parseInt(id))
+  );
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(requestFetchIssueById(id));
+  }, [dispatch, id]);
 
   return (
     <Paper className={classes.content}>
       <Formik
         initialValues={{
-          id: 0,
-          name: '',
-          status: '0',
-          isNew: '0',
-          createdDate: '2019-12-31',
-          createdBy: 'Leon'
+          id: issue.id,
+          name: issue.name,
+          status: issue.status,
+          isNew: issue.isNew ? 0 : 1,
+          createdDate: issue.createdDate,
+          createdBy: issue.createdBy
         }}
         validationSchema={Yup.object({
           name: Yup.string()
