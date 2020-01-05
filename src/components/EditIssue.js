@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,7 +7,7 @@ import { Button, MenuItem, Paper } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { requestFetchIssueById } from '../store/actions';
+import { requestFetchIssueById, modifyIssue } from '../store/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function EditIssue() {
   const classes = useStyles();
   const { id } = useParams();
+  const history = useHistory();
   const issue = useSelector((state) =>
     state.issues.items.find((x) => x.id === parseInt(id))
   );
@@ -49,13 +51,22 @@ export default function EditIssue() {
         }}
         validationSchema={Yup.object({
           name: Yup.string()
-            .max(20, 'Must be 20 characters or less')
+            .max(100, 'Must be 100 characters or less')
             .required('Required')
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            console.log(JSON.stringify(values, null, 2));
+            let issue = {
+              id: values.id,
+              name: values.name,
+              status: parseInt(values.status),
+              isNew: values.isNew === '0' ? true : false,
+              createdDate: values.createdDate,
+              createdBy: values.createdDate
+            };
+            dispatch(modifyIssue(issue));
             setSubmitting(false);
+            history.push('/issues');
           }, 400);
         }}
       >

@@ -68,13 +68,25 @@ var data = [
   }
 ];
 
-router.use('/issues', function(req, res) {  
+router.use('/issues', function(req, res) {
+  return res.json(data);
+});
+
+router.use('/issue/update', function(req, res) {
+  var issue = req.body.issue;
+  data = data.map((x) => {
+    if (x.id === issue.id) {
+      return Object.assign({}, x, issue);
+    }
+    return x;
+  });
+
   return res.json(data);
 });
 
 router.use('/issue/:id', function(req, res) {
-  var id = req.params["id"];
-  var issue = data.filter(x => x.id === id);
+  var id = req.params['id'];
+  var issue = data.filter((x) => x.id === parseInt(id));
   return res.json(issue);
 });
 

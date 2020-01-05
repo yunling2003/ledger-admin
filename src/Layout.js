@@ -193,7 +193,12 @@ function MainLayout(props) {
                   </ListItemIcon>
                   <ListItemText primary={'Dashboard'} />
                 </ListItem>
-                <ListItem button component="a" href="/" key={'Issue List'}>
+                <ListItem
+                  button
+                  component="a"
+                  href="/issues"
+                  key={'Issue List'}
+                >
                   <ListItemIcon>
                     <FormatListNumberedIcon color="primary" />
                   </ListItemIcon>

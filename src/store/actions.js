@@ -2,6 +2,7 @@ export const ISSUE_GET = 'ISSUE_GET';
 export const ISSUES_RECEIVED = 'ISSUES_RECEIVED';
 export const ISSUE_GETBYID = 'ISSUE_GETBYID';
 export const ISSUE_RECEIVED = 'ISSUE_RECEIVED';
+export const ISSUE_MODIFY = 'ISSUE_MODIFY';
 
 export function requestFetchIssues() {
   return {
@@ -26,6 +27,13 @@ export function requestFetchIssueById(id) {
 export function receiveIssue(issue) {
   return {
     type: ISSUE_RECEIVED,
+    issue
+  };
+}
+
+export function modifyIssue(issue) {
+  return {
+    type: ISSUE_MODIFY,
     issue
   };
 }
