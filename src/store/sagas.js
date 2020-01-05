@@ -4,7 +4,8 @@ import {
   receiveIssues,
   ISSUE_GETBYID,
   receiveIssue,
-  ISSUE_MODIFY
+  ISSUE_MODIFY,
+  ISSUE_ADD
 } from './actions';
 import * as API from '../services/index';
 
@@ -35,6 +36,15 @@ function* updateIssue(action) {
   }
 }
 
+function* addIssue(action) {
+  const res = yield call(API.addIssue, action.issue);
+  if (res) {
+    yield put(receiveIssues(res.data));
+  } else {
+    console.error('Add Issue Error!');
+  }
+}
+
 function* fetchAllIssuesAsync() {
   yield takeEvery(ISSUE_GET, fetchAllIssues);
 }
@@ -47,6 +57,15 @@ function* updateIssueAsync() {
   yield takeEvery(ISSUE_MODIFY, updateIssue);
 }
 
+function* addIssueAsync() {
+  yield takeEvery(ISSUE_ADD, addIssue);
+}
+
 export default function* rootSaga() {
-  yield all([fetchAllIssuesAsync(), fetchIssueByIdAsync(), updateIssueAsync()]);
+  yield all([
+    fetchAllIssuesAsync(),
+    fetchIssueByIdAsync(),
+    updateIssueAsync(),
+    addIssueAsync()
+  ]);
 }

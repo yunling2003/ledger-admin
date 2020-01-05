@@ -1,13 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux';
 import { Button, MenuItem, Paper } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
+import { makeStyles } from '@material-ui/core/styles';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { requestFetchIssueById, modifyIssue } from '../store/actions';
+import { addIssue } from '../store/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,29 +24,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function EditIssue() {
+export default function AddIssue() {
   const classes = useStyles();
-  const { id } = useParams();
   const history = useHistory();
-  const issue = useSelector((state) =>
-    state.issues.items.find((x) => x.id === parseInt(id))
-  );
   const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(requestFetchIssueById(id));
-  }, [dispatch, id]);
 
   return (
     <Paper className={classes.content}>
       <Formik
         initialValues={{
-          id: issue.id,
-          name: issue.name,
-          status: issue.status,
-          isNew: issue.isNew ? 0 : 1,
-          createdDate: issue.createdDate,
-          createdBy: issue.createdBy
+          name: '',
+          status: '0',
+          isNew: '0',
+          createdDate: '',
+          createdBy: ''
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -55,33 +45,20 @@ export default function EditIssue() {
             .required('Required')
         })}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            let issue = {
-              id: values.id,
-              name: values.name,
-              status: parseInt(values.status),
-              isNew: values.isNew === '0' ? true : false,
-              createdDate: values.createdDate,
-              createdBy: values.createdBy
-            };
-            dispatch(modifyIssue(issue));
-            setSubmitting(false);
-            history.push('/issues');
-          }, 400);
+          let issue = {
+            name: values.name,
+            status: parseInt(values.status),
+            isNew: values.isNew === '0' ? true : false,
+            createdDate: values.createdDate,
+            createdBy: values.createdBy
+          };
+          dispatch(addIssue(issue));
+          setSubmitting(false);
+          history.push('/issues');
         }}
       >
         {({ isSubmitting }) => (
           <Form className={classes.root}>
-            <div>
-              <Field
-                name="id"
-                type="text"
-                label="Issue Id"
-                component={TextField}
-                margin="normal"
-                disabled
-              />
-            </div>
             <div>
               <Field
                 name="name"
@@ -131,11 +108,13 @@ export default function EditIssue() {
             <div>
               <Field
                 name="createdDate"
-                type="text"
+                type="date"
                 label="Created Date"
                 component={TextField}
                 margin="normal"
-                disabled
+                InputLabelProps={{
+                  shrink: true
+                }}
               />
             </div>
             <div>
@@ -145,7 +124,6 @@ export default function EditIssue() {
                 label="Created By"
                 component={TextField}
                 margin="normal"
-                disabled
               />
             </div>
             <div className={classes.submit}>

@@ -70,8 +70,8 @@ const useStyles = makeStyles((theme) => ({
 export default function IssueList() {
   const history = useHistory();
   const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('name');
+  const [order, setOrder] = React.useState('desc');
+  const [orderBy, setOrderBy] = React.useState('id');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const rows = useSelector((state) => state.issues.items);
@@ -102,6 +102,10 @@ export default function IssueList() {
 
   const handleDeleteClick = (event, id) => {
     console.log(id);
+  };
+
+  const handleAddClick = () => {
+    history.push(`/issues/add`);
   };
 
   const getStatusDesc = (status) => {
@@ -181,7 +185,12 @@ export default function IssueList() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      <Button variant="contained" color="primary" startIcon={<AddIcon />}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => handleAddClick()}
+        startIcon={<AddIcon />}
+      >
         Add
       </Button>
     </div>

@@ -84,6 +84,13 @@ router.use('/issue/update', function(req, res) {
   return res.json(data);
 });
 
+router.use('/issue/add', function(req, res) {
+  var issue = req.body.issue;
+  issue.id = data.length + 1;
+  data.push(issue);
+  return res.json(data);
+});
+
 router.use('/issue/:id', function(req, res) {
   var id = req.params['id'];
   var issue = data.filter((x) => x.id === parseInt(id));

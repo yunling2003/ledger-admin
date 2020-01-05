@@ -3,6 +3,7 @@ export const ISSUES_RECEIVED = 'ISSUES_RECEIVED';
 export const ISSUE_GETBYID = 'ISSUE_GETBYID';
 export const ISSUE_RECEIVED = 'ISSUE_RECEIVED';
 export const ISSUE_MODIFY = 'ISSUE_MODIFY';
+export const ISSUE_ADD = 'ISSUE_ADD';
 
 export function requestFetchIssues() {
   return {
@@ -34,6 +35,13 @@ export function receiveIssue(issue) {
 export function modifyIssue(issue) {
   return {
     type: ISSUE_MODIFY,
+    issue
+  };
+}
+
+export function addIssue(issue) {
+  return {
+    type: ISSUE_ADD,
     issue
   };
 }

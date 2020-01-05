@@ -11,3 +11,7 @@ export const getIssueById = (id) => {
 export const modifyIssue = (issue) => {
   return fetch.post(`/issue/update`, { issue });
 };
+
+export const addIssue = (issue) => {
+  return fetch.post(`/issue/add`, { issue });
+};
