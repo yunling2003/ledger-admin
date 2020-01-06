@@ -5,7 +5,8 @@ import {
   ISSUE_GETBYID,
   receiveIssue,
   ISSUE_MODIFY,
-  ISSUE_ADD
+  ISSUE_ADD,
+  ISSUE_DELETE
 } from './actions';
 import * as API from '../services/index';
 
@@ -45,6 +46,15 @@ function* addIssue(action) {
   }
 }
 
+function* deleteIssue(action) {
+  const res = yield call(API.deleteIssue, action.id);
+  if (res) {
+    yield put(receiveIssues(res.data));
+  } else {
+    console.error('Delete Issue Error!');
+  }
+}
+
 function* fetchAllIssuesAsync() {
   yield takeEvery(ISSUE_GET, fetchAllIssues);
 }
@@ -61,11 +71,16 @@ function* addIssueAsync() {
   yield takeEvery(ISSUE_ADD, addIssue);
 }
 
+function* deleteIssueAsync() {
+  yield takeEvery(ISSUE_DELETE, deleteIssue);
+}
+
 export default function* rootSaga() {
   yield all([
     fetchAllIssuesAsync(),
     fetchIssueByIdAsync(),
     updateIssueAsync(),
-    addIssueAsync()
+    addIssueAsync(),
+    deleteIssueAsync()
   ]);
 }

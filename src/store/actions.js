@@ -4,6 +4,7 @@ export const ISSUE_GETBYID = 'ISSUE_GETBYID';
 export const ISSUE_RECEIVED = 'ISSUE_RECEIVED';
 export const ISSUE_MODIFY = 'ISSUE_MODIFY';
 export const ISSUE_ADD = 'ISSUE_ADD';
+export const ISSUE_DELETE = 'ISSUE_DELETE';
 
 export function requestFetchIssues() {
   return {
@@ -43,5 +44,12 @@ export function addIssue(issue) {
   return {
     type: ISSUE_ADD,
     issue
+  };
+}
+
+export function deleteIssue(id) {
+  return {
+    type: ISSUE_DELETE,
+    id
   };
 }

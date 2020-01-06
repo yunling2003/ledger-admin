@@ -15,7 +15,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Paper from '@material-ui/core/Paper';
 import IssueListHead from './IssueListHead';
-import { requestFetchIssues } from '../store/actions';
+import DeleteDialog from './DeleteIssueDialog';
+import { requestFetchIssues, deleteIssue } from '../store/actions';
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -74,6 +75,8 @@ export default function IssueList() {
   const [orderBy, setOrderBy] = React.useState('id');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [delIssueId, setDelIssueId] = React.useState(0);
+  const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
   const rows = useSelector((state) => state.issues.items);
   const dispatch = useDispatch();
 
@@ -101,7 +104,16 @@ export default function IssueList() {
   };
 
   const handleDeleteClick = (event, id) => {
-    console.log(id);
+    setDelIssueId(id);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteIssue = (id) => {
+    dispatch(deleteIssue(id));
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setDeleteDialogOpen(false);
   };
 
   const handleAddClick = () => {
@@ -193,6 +205,12 @@ export default function IssueList() {
       >
         Add
       </Button>
+      <DeleteDialog
+        issueId={delIssueId}
+        open={deleteDialogOpen}
+        onDeleteIssue={handleDeleteIssue}
+        onClose={handleCloseDeleteDialog}
+      />
     </div>
   );
 }

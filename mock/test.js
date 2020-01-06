@@ -91,6 +91,12 @@ router.use('/issue/add', function(req, res) {
   return res.json(data);
 });
 
+router.use('/issue/delete', function(req, res) {
+  var id = req.body.id;
+  data = data.filter(x => x.id !== id);
+  return res.json(data);
+});
+
 router.use('/issue/:id', function(req, res) {
   var id = req.params['id'];
   var issue = data.filter((x) => x.id === parseInt(id));
