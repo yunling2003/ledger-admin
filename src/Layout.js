@@ -187,7 +187,7 @@ function MainLayout(props) {
               </div>
               <Divider />
               <List>
-                <ListItem button key={'Dashboard'}>
+                <ListItem button component="a" href="/" key={'Dashboard'}>
                   <ListItemIcon>
                     <DashboardIcon color="primary" />
                   </ListItemIcon>

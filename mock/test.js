@@ -6,7 +6,7 @@ var data = [
     id: 1,
     name: 'Project A schedule review',
     status: 0,
-    isNew: true,
+    isNew: false,
     createdDate: '2019-12-23',
     createdBy: 'Leon'
   },
@@ -22,7 +22,7 @@ var data = [
     id: 3,
     name: 'Demo meeting Sprint 16',
     status: 2,
-    isNew: true,
+    isNew: false,
     createdDate: '2019-11-30',
     createdBy: 'Leon'
   },
@@ -93,8 +93,21 @@ router.use('/issue/add', function(req, res) {
 
 router.use('/issue/delete', function(req, res) {
   var id = req.body.id;
-  data = data.filter(x => x.id !== id);
+  data = data.filter((x) => x.id !== id);
   return res.json(data);
+});
+
+router.use('/issue/status/get', function(req, res) {
+  var started = data.filter((x) => x.status === 0).length;
+  var inProgress = data.filter((x) => x.status === 1).length;
+  var done = data.filter((x) => x.status === 2).length;
+  return res.json([started, inProgress, done]);
+});
+
+router.use('/issue/new/get', function(req, res) {
+  var oldIssue = data.filter((x) => x.isNew === false).length;
+  var newIssue = data.filter((x) => x.isNew === true).length;
+  return res.json([newIssue, oldIssue]);
 });
 
 router.use('/issue/:id', function(req, res) {

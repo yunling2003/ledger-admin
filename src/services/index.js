@@ -19,3 +19,11 @@ export const addIssue = (issue) => {
 export const deleteIssue = (id) => {
   return fetch.post(`/issue/delete`, { id });
 };
+
+export const getIssueStatusReport = () => {
+  return fetch.get('/issue/status/get');
+};
+
+export const getIssueIsNewReport = () => {
+  return fetch.get('/issue/new/get');
+};
