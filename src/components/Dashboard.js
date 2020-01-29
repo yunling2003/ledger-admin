@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -9,6 +10,7 @@ import 'echarts/lib/component/title';
 import 'echarts/lib/chart/bar';
 import 'echarts/lib/chart/pie';
 import * as API from '../services/index';
+import { requestFetchIssues } from '../store/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +27,7 @@ export default function Dashboard() {
   const classes = useStyles();
   const [status, setStatus] = React.useState([]);
   const [isNew, setIsNew] = React.useState([]);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     API.getIssueStatusReport().then((res) => {
@@ -41,6 +44,10 @@ export default function Dashboard() {
       }
     });
   }, []);
+
+  React.useEffect(() => {
+    dispatch(requestFetchIssues());
+  }, [dispatch]);
 
   const getNewOptions = () => ({
     title: {

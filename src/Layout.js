@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { Route } from 'react-router-dom';
 import {
@@ -28,6 +29,8 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { blue, pink, indigo } from '@material-ui/core/colors';
+import Badge from '@material-ui/core/Badge';
+import NewReleasesIcon from '@material-ui/icons/NewReleases';
 
 const drawerWidth = 240;
 
@@ -110,6 +113,9 @@ function MainLayout(props) {
   const { component: Component, ...rest } = props;
   const classes = useStyles();
   const theme = useTheme();
+  const newIssues = useSelector(
+    (state) => state.issues.items.filter((x) => x.isNew === true).length
+  );
   const [open, setOpen] = React.useState(true);
   const [layoutTheme, setLayoutTheme] = React.useState(blueTheme);
 
@@ -155,6 +161,9 @@ function MainLayout(props) {
                 >
                   Leon&apos;s Admin Hub
                 </Typography>
+                <Badge badgeContent={newIssues} color="secondary">
+                  <NewReleasesIcon />
+                </Badge>
                 <IconButton color="inherit" onClick={switchTheme}>
                   <InvertColorsIcon />
                 </IconButton>
