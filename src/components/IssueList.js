@@ -158,8 +158,8 @@ export default function IssueList() {
                       <TableCell align="left">
                         {getStatusDesc(row.status)}
                       </TableCell>
-                      <TableCell align="left">{row.createdDate}</TableCell>
-                      <TableCell align="left">{row.createdBy}</TableCell>
+                      <TableCell align="left">{row.createddate}</TableCell>
+                      <TableCell align="left">{row.createdby}</TableCell>
                       <TableCell size="small" padding="none">
                         <IconButton
                           color="secondary"

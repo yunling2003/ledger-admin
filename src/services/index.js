@@ -5,7 +5,7 @@ export const getAllIssues = () => {
 };
 
 export const getIssueById = (id) => {
-  return fetch.get(`/issue/${id}`);
+  return fetch.get(`/issues/${id}`);
 };
 
 export const modifyIssue = (issue) => {
@@ -17,7 +17,7 @@ export const addIssue = (issue) => {
 };
 
 export const deleteIssue = (id) => {
-  return fetch.post(`/issue/delete`, { id });
+  return fetch.get(`/issue/delete/${id}`);
 };
 
 export const getIssueStatusReport = () => {

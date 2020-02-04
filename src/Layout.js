@@ -114,7 +114,7 @@ function MainLayout(props) {
   const classes = useStyles();
   const theme = useTheme();
   const newIssues = useSelector(
-    (state) => state.issues.items.filter((x) => x.isNew === true).length
+    (state) => state.issues.items.filter((x) => x.isnew === true).length
   );
   const [open, setOpen] = React.useState(true);
   const [layoutTheme, setLayoutTheme] = React.useState(blueTheme);

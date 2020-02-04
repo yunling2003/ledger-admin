@@ -10,12 +10,12 @@ const headCells = [
   { id: 'name', numeric: false, disablePadding: false, label: 'Issue Name' },
   { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
   {
-    id: 'createdDate',
+    id: 'createddate',
     numeric: false,
     disablePadding: false,
     label: 'Create Date'
   },
-  { id: 'createdBy', numeric: false, disablePadding: false, label: 'Create By' }
+  { id: 'createdby', numeric: false, disablePadding: false, label: 'Create By' }
 ];
 
 export default function IssueListHead(props) {

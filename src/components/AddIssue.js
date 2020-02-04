@@ -35,9 +35,9 @@ export default function AddIssue() {
         initialValues={{
           name: '',
           status: '0',
-          isNew: '0',
-          createdDate: '',
-          createdBy: ''
+          isnew: '0',
+          createddate: '',
+          createdby: ''
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -48,9 +48,9 @@ export default function AddIssue() {
           let issue = {
             name: values.name,
             status: parseInt(values.status),
-            isNew: values.isNew === '0' ? true : false,
-            createdDate: values.createdDate,
-            createdBy: values.createdBy
+            isnew: values.isnew === '0' ? true : false,
+            createddate: new Date(values.createddate).toISOString(),
+            createdby: values.createdby
           };
           dispatch(addIssue(issue));
           setSubmitting(false);
@@ -91,7 +91,7 @@ export default function AddIssue() {
             <div>
               <Field
                 select
-                name="isNew"
+                name="isnew"
                 type="text"
                 label="Select Process Status"
                 component={TextField}
@@ -107,8 +107,8 @@ export default function AddIssue() {
             </div>
             <div>
               <Field
-                name="createdDate"
-                type="date"
+                name="createddate"
+                type="datetime-local"
                 label="Created Date"
                 component={TextField}
                 margin="normal"
@@ -119,7 +119,7 @@ export default function AddIssue() {
             </div>
             <div>
               <Field
-                name="createdBy"
+                name="createdby"
                 type="text"
                 label="Created By"
                 component={TextField}

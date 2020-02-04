@@ -6,65 +6,65 @@ var data = [
     id: 1,
     name: 'Project A schedule review',
     status: 0,
-    isNew: false,
-    createdDate: '2019-12-23',
-    createdBy: 'Leon'
+    isnew: false,
+    createddate: '2019-12-23T11:23:06Z',
+    createdby: 'Leon'
   },
   {
     id: 2,
     name: 'Deploy B to Production',
     status: 1,
-    isNew: true,
-    createdDate: '2019-12-10',
-    createdBy: 'Leon'
+    isnew: true,
+    createddate: '2019-12-10T17:15:43Z',
+    createdby: 'Leon'
   },
   {
     id: 3,
     name: 'Demo meeting Sprint 16',
     status: 2,
-    isNew: false,
-    createdDate: '2019-11-30',
-    createdBy: 'Leon'
+    isnew: false,
+    createddate: '2019-11-30T09:05:10Z',
+    createdby: 'Leon'
   },
   {
     id: 4,
     name: 'Birth day celeration(December)',
     status: 0,
-    isNew: true,
-    createdDate: '2019-12-5',
-    createdBy: 'Leon'
+    isnew: true,
+    createddate: '2019-12-5T20:11:31Z',
+    createdby: 'Leon'
   },
   {
     id: 5,
     name: 'Report project C status',
     status: 1,
-    isNew: true,
-    createdDate: '2019-12-9',
-    createdBy: 'Jack'
+    isnew: true,
+    createddate: '2019-12-9T10:01:03Z',
+    createdby: 'Jack'
   },
   {
     id: 6,
     name: 'Team building activity',
     status: 2,
-    isNew: true,
-    createdDate: '2019-12-8',
-    createdBy: 'Bob'
+    isnew: true,
+    createddate: '2019-12-8T22:55:44Z',
+    createdby: 'Bob'
   },
   {
     id: 7,
     name: 'Microsoft Ignite Summit Shanghai 3/14',
     status: 0,
-    isNew: true,
-    createdDate: '2019-12-24',
-    createdBy: 'Leon'
+    isnew: true,
+    createddate: '2019-12-24T06:06:18Z',
+    createdby: 'Leon'
   },
   {
     id: 8,
     name: 'Veracity product integration pipeline',
     status: 1,
-    isNew: true,
-    createdDate: '2019-12-25',
-    createdBy: 'Leon'
+    isnew: true,
+    createddate: '2019-12-25T13:12:29Z',
+    createdby: 'Leon'
   }
 ];
 
@@ -86,14 +86,15 @@ router.use('/issue/update', function(req, res) {
 
 router.use('/issue/add', function(req, res) {
   var issue = req.body.issue;
-  issue.id = data.length + 1;
+  var maxId = data.map(x => x.id).sort((a,b) => b - a)[0];
+  issue.id = maxId + 1;
   data.push(issue);
   return res.json(data);
 });
 
-router.use('/issue/delete', function(req, res) {
-  var id = req.body.id;
-  data = data.filter((x) => x.id !== id);
+router.use('/issue/delete/:id', function(req, res) {
+  var id = req.params['id'];
+  data = data.filter((x) => x.id !== parseInt(id));
   return res.json(data);
 });
 
@@ -105,12 +106,12 @@ router.use('/issue/status/get', function(req, res) {
 });
 
 router.use('/issue/new/get', function(req, res) {
-  var oldIssue = data.filter((x) => x.isNew === false).length;
-  var newIssue = data.filter((x) => x.isNew === true).length;
+  var oldIssue = data.filter((x) => x.isnew === false).length;
+  var newIssue = data.filter((x) => x.isnew === true).length;
   return res.json([newIssue, oldIssue]);
 });
 
-router.use('/issue/:id', function(req, res) {
+router.use('/issues/:id', function(req, res) {
   var id = req.params['id'];
   var issue = data.filter((x) => x.id === parseInt(id));
   return res.json(issue);

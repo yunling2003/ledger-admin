@@ -45,9 +45,9 @@ export default function EditIssue() {
           id: issue.id,
           name: issue.name,
           status: issue.status,
-          isNew: issue.isNew ? 0 : 1,
-          createdDate: issue.createdDate,
-          createdBy: issue.createdBy
+          isnew: issue.isnew ? 0 : 1,
+          createddate: issue.createddate,
+          createdby: issue.createdby
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -60,9 +60,9 @@ export default function EditIssue() {
               id: values.id,
               name: values.name,
               status: parseInt(values.status),
-              isNew: values.isNew === '0' ? true : false,
-              createdDate: values.createdDate,
-              createdBy: values.createdBy
+              isnew: values.isnew === '0' ? true : false,
+              createddate: new Date(values.createddate).toISOString(),
+              createdby: values.createdby
             };
             dispatch(modifyIssue(issue));
             setSubmitting(false);
@@ -114,7 +114,7 @@ export default function EditIssue() {
             <div>
               <Field
                 select
-                name="isNew"
+                name="isnew"
                 type="text"
                 label="Select Process Status"
                 component={TextField}
@@ -130,7 +130,7 @@ export default function EditIssue() {
             </div>
             <div>
               <Field
-                name="createdDate"
+                name="createddate"
                 type="text"
                 label="Created Date"
                 component={TextField}
@@ -140,7 +140,7 @@ export default function EditIssue() {
             </div>
             <div>
               <Field
-                name="createdBy"
+                name="createdby"
                 type="text"
                 label="Created By"
                 component={TextField}
