@@ -24,14 +24,17 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.3",
+    "shelljs": "^0.8.3",
     "validate-commit-msg": "^2.14.0",
     "yup": "^0.28.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:copy": "react-scripts build && node ./scripts/deploy-local.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js",

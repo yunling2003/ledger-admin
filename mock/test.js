@@ -73,7 +73,7 @@ router.use('/issues', function(req, res) {
 });
 
 router.use('/issue/update', function(req, res) {
-  var issue = req.body.issue;
+  var issue = req.body;
   data = data.map((x) => {
     if (x.id === issue.id) {
       return Object.assign({}, x, issue);
@@ -85,7 +85,7 @@ router.use('/issue/update', function(req, res) {
 });
 
 router.use('/issue/add', function(req, res) {
-  var issue = req.body.issue;
+  var issue = req.body;
   var maxId = data.map(x => x.id).sort((a,b) => b - a)[0];
   issue.id = maxId + 1;
   data.push(issue);
