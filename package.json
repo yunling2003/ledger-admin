@@ -32,10 +32,11 @@
     "yup": "^0.28.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:copy": "react-scripts build && node ./scripts/deploy-local.js",
+    "start": "react-scripts start",   
     "test": "react-scripts test",
+    "test:copy": "react-scripts test && node ./scripts/deploy-local.js",
+    "build": "react-scripts build",
+    "build:copy": "react-scripts build && node ./scripts/deploy-local.js",    
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.js",
     "mock": "node ./mock/server.js"
